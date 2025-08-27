@@ -1,0 +1,5 @@
+name=Rasterizer in C
+author=Ramiro Alurralde
+description=A small Rasterizer using C
+bundleID=com.ramo.ramo1606
+imagePath=
