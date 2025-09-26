@@ -1,4 +1,6 @@
+#include "common.h"
 #include "renderer.h"
+#include "logging.h"
 #include "memory.h"
 
 Renderer* renderer_create(void)
@@ -9,6 +11,10 @@ Renderer* renderer_create(void)
         LOG_ERROR("renderer:create: Memory allocation failed");
         return NULL;
     }
+
+    renderer->initialized = false;
+	renderer->font = NULL;
+
 	return renderer;
 }
 

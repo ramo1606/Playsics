@@ -1,3 +1,4 @@
+#include "common.h"
 #include "engine.h"
 
 /* Playdate API instance */
@@ -7,12 +8,6 @@ Engine engine;
 /* Function prototypes */
 static int update(void* userdata) 
 {
-    // Check if application is still running
-    if (!engine_is_running(&engine)) 
-    {
-        return 0; // Signal to stop the update loop
-    }
-
     // Handle input
     engine_input(&engine);
 

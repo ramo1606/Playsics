@@ -1,9 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "core.h"
-#include "logging.h" 
-
 #ifdef DEBUG
 #include "logging.h"
 #define VECTOR_ASSERT(condition, message) \
