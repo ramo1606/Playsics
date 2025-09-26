@@ -1,9 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <math.h>
-#include <stdbool.h>
-
+#include "core.h"
 #include "logging.h" 
 
 #ifdef DEBUG
@@ -15,39 +13,22 @@
 #endif
 
 /* ========================================================================== */
-/* TYPE DEFINITIONS                                                           */
-/* ========================================================================== */
-
-typedef struct
-{
-    float x;
-    float y;
-} vec2_t;
-
-typedef struct
-{
-    float x;
-    float y;
-    float z;
-} vec3_t;
-
-/* ========================================================================== */
 /* CONSTANTS                                                                  */
 /* ========================================================================== */
 
 static const float VECTOR_EPSILON = 1e-6f;
 
-static const vec2_t VEC2_ZERO = { 0.0f, 0.0f };
-static const vec2_t VEC2_ONE = { 1.0f, 1.0f };
+static const Vector2 VEC2_ZERO = { 0.0f, 0.0f };
+static const Vector2 VEC2_ONE = { 1.0f, 1.0f };
 
-static const vec3_t VEC3_ZERO = { 0.0f, 0.0f, 0.0f };
-static const vec3_t VEC3_ONE = { 1.0f, 1.0f, 1.0f };
+static const Vector3 VEC3_ZERO = { 0.0f, 0.0f, 0.0f };
+static const Vector3 VEC3_ONE = { 1.0f, 1.0f, 1.0f };
 
 /* ========================================================================== */
 /* UTILITY FUNCTIONS                                                          */
 /* ========================================================================== */
 
-static inline bool float_equal(float a, float b) 
+static inline bool float_equals(float a, float b) 
 {
     return fabsf(a - b) < VECTOR_EPSILON;
 }
@@ -68,83 +49,83 @@ static inline float float_lerp(float a, float b, float t)
 /* VEC2 BASIC OPERATIONS                                                      */
 /* ========================================================================== */
 
-/* Create a new vec2_t */
-static inline vec2_t vec2_new(float x, float y)
+/* Create a new Vector2 */
+static inline Vector2 vec2_new(float x, float y)
 {
-    return (vec2_t) { x, y };
+    return (Vector2) { x, y };
 }
 
-/* Adds two vec2_t vectors */
-static inline vec2_t vec2_add(vec2_t a, vec2_t b)
+/* Adds two Vector2 vectors */
+static inline Vector2 vec2_add(Vector2 a, Vector2 b)
 {
-    return (vec2_t) { a.x + b.x, a.y + b.y };
+    return (Vector2) { a.x + b.x, a.y + b.y };
 }
 
-/* Subtracts vec2_t b from vec2_t a */
-static inline vec2_t vec2_sub(vec2_t a, vec2_t b)
+/* Subtracts Vector2 b from Vector2 a */
+static inline Vector2 vec2_sub(Vector2 a, Vector2 b)
 {
-    return (vec2_t) { a.x - b.x, a.y - b.y };
+    return (Vector2) { a.x - b.x, a.y - b.y };
 }
 
-/* Scales a vec2_t by a scalar */
-static inline vec2_t vec2_scale(vec2_t v, float scalar)
+/* Scales a Vector2 by a scalar */
+static inline Vector2 vec2_scale(Vector2 v, float scalar)
 {
-    return (vec2_t) { v.x * scalar, v.y * scalar };
+    return (Vector2) { v.x * scalar, v.y * scalar };
 }
 
-/* Component-wise multiplication of two vec2_t vectors */
-static inline vec2_t vec2_multiply(vec2_t a, vec2_t b)
+/* Component-wise multiplication of two Vector2 vectors */
+static inline Vector2 vec2_multiply(Vector2 a, Vector2 b)
 {
-    return (vec2_t) { a.x * b.x, a.y * b.y };
+    return (Vector2) { a.x * b.x, a.y * b.y };
 }
 
-/* Divides a vec2_t by a scalar with zero-check */
-static inline vec2_t vec2_divide(vec2_t v, float scalar)
+/* Divides a Vector2 by a scalar with zero-check */
+static inline Vector2 vec2_divide(Vector2 v, float scalar)
 {
     VECTOR_ASSERT(fabsf(scalar) > VECTOR_EPSILON, "Division by zero in vec2_divide");
     if (fabsf(scalar) < VECTOR_EPSILON) 
     {
         return VEC2_ZERO;
     }
-    return (vec2_t) { v.x / scalar, v.y / scalar };
+    return (Vector2) { v.x / scalar, v.y / scalar };
 }
 
-/* Negates a vec2_t vector */
-static inline vec2_t vec2_negate(vec2_t v)
+/* Negates a Vector2 vector */
+static inline Vector2 vec2_negate(Vector2 v)
 {
-    return (vec2_t) { -v.x, -v.y };
+    return (Vector2) { -v.x, -v.y };
 }
 
 /* ========================================================================== */
 /* VEC2 ADVANCED OPERATIONS                                                   */
 /* ========================================================================== */
 
-/* Dot product of two vec2_t vectors */
-static inline float vec2_dot(vec2_t a, vec2_t b)
+/* Dot product of two Vector2 vectors */
+static inline float vec2_dot(Vector2 a, Vector2 b)
 {
     return a.x * b.x + a.y * b.y;
 }
 
-/* Cross product of two vec2_t vectors (returns scalar in 2D) */
-static inline float vec2_cross(vec2_t a, vec2_t b)
+/* Cross product of two Vector2 vectors (returns scalar in 2D) */
+static inline float vec2_cross(Vector2 a, Vector2 b)
 {
     return a.x * b.y - a.y * b.x;
 }
 
-/* Length (magnitude) of a vec2_t vector */
-static inline float vec2_length(vec2_t v)
+/* Length (magnitude) of a Vector2 vector */
+static inline float vec2_length(Vector2 v)
 {
     return sqrtf(v.x * v.x + v.y * v.y);
 }
 
-/* Squared length of a vec2_t vector */
-static inline float vec2_length_squared(vec2_t v)
+/* Squared length of a Vector2 vector */
+static inline float vec2_length_squared(Vector2 v)
 {
     return v.x * v.x + v.y * v.y;
 }
 
-/* Normalizes a vec2_t vector */
-static inline vec2_t vec2_normalize(vec2_t v)
+/* Normalizes a Vector2 vector */
+static inline Vector2 vec2_normalize(Vector2 v)
 {
     float len = vec2_length(v);
     VECTOR_ASSERT(len > VECTOR_EPSILON, "Cannot normalize zero-length vector in vec2_normalize");
@@ -155,48 +136,48 @@ static inline vec2_t vec2_normalize(vec2_t v)
     return vec2_divide(v, len);
 }
 
-/* Distance between two vec2_t vectors */
-static inline float vec2_distance(vec2_t a, vec2_t b)
+/* Distance between two Vector2 vectors */
+static inline float vec2_distance(Vector2 a, Vector2 b)
 {
     return vec2_length(vec2_sub(b, a));
 }
 
-/* Squared distance between two vec2_t vectors */
-static inline float vec2_distance_squared(vec2_t a, vec2_t b)
+/* Squared distance between two Vector2 vectors */
+static inline float vec2_distance_squared(Vector2 a, Vector2 b)
 {
     return vec2_length_squared(vec2_sub(b, a));
 }
 
-/* Linear interpolation between two vec2_t vectors */
-static inline vec2_t vec2_lerp(vec2_t a, vec2_t b, float t)
+/* Linear interpolation between two Vector2 vectors */
+static inline Vector2 vec2_lerp(Vector2 a, Vector2 b, float t)
 {
     t = float_clamp(t, 0.0f, 1.0f);
-    return (vec2_t) { float_lerp(a.x, b.x, t), float_lerp(a.y, b.y, t) };
+    return (Vector2) { float_lerp(a.x, b.x, t), float_lerp(a.y, b.y, t) };
 }
 
-/* Rotate a vec2_t by an angle in radians */
-static inline vec2_t vec2_rotate(vec2_t v, float angle_rad)
+/* Rotate a Vector2 by an angle in radians */
+static inline Vector2 vec2_rotate(Vector2 v, float angle_rad)
 {
     float cos_a = cosf(angle_rad);
     float sin_a = sinf(angle_rad);
-    return (vec2_t) { v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a };
+    return (Vector2) { v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a };
 }
 
-/* Angle of a vec2_t in radians from the positive x-axis */
-static inline float vec2_angle(vec2_t v) 
+/* Angle of a Vector2 in radians from the positive x-axis */
+static inline float vec2_angle(Vector2 v) 
 {
 	return atan2f(v.y, v.x);
 }
 
 /* Reflects a vector off a surface with given normal */
-static inline vec2_t vec2_reflect(vec2_t incident, vec2_t normal) 
+static inline Vector2 vec2_reflect(Vector2 incident, Vector2 normal) 
 {
     float dot_product = vec2_dot(incident, normal);
     return vec2_sub(incident, vec2_scale(normal, 2.0f * dot_product));
 }
 
 /* Projects vector a onto vector b */
-static inline vec2_t vec2_project(vec2_t a, vec2_t b) 
+static inline Vector2 vec2_project(Vector2 a, Vector2 b) 
 {
     float b_length_squared = vec2_length_squared(b);
     VECTOR_ASSERT(b_length_squared > VECTOR_EPSILON, "Cannot project onto zero-length vector in vec2_project");
@@ -212,14 +193,14 @@ static inline vec2_t vec2_project(vec2_t a, vec2_t b)
 /* VEC2 COMPARISON OPERATIONS                                                 */
 /* ========================================================================== */
 
-/* Checks if two vec2_t vectors are equal (with epsilon tolerance) */
-static inline bool vec2_equals(vec2_t a, vec2_t b) 
+/* Checks if two Vector2 vectors are equal (with epsilon tolerance) */
+static inline bool vec2_equals(Vector2 a, Vector2 b) 
 {
     return float_equals(a.x, b.x) && float_equals(a.y, b.y);
 }
 
-/* Checks if vec2_t is zero vector (with epsilon tolerance) */
-static inline bool vec2_is_zero(vec2_t v) 
+/* Checks if Vector2 is zero vector (with epsilon tolerance) */
+static inline bool vec2_is_zero(Vector2 v) 
 {
     return vec2_length_squared(v) < (VECTOR_EPSILON * VECTOR_EPSILON);
 }

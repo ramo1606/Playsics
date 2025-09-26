@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 #include "pd_api.h"
 
@@ -23,5 +24,18 @@ typedef struct
 
 	Renderer* renderer;
 } Engine;
+
+typedef struct
+{
+	float x;
+	float y;
+} Vector2;
+
+typedef struct
+{
+	float x;
+	float y;
+	float z;
+} Vector3;
 
 #endif // !CORE_H
