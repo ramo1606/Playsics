@@ -1,17 +1,16 @@
-#ifndef LOGGING_H /* Header guard to prevent multiple inclusion */
+#ifndef LOGGING_H
 #define LOGGING_H
 
-#include "pd_api.h"
+#include "core.h"
 
-/* Extern declaration for the PlaydateAPI singleton */
-extern PlaydateAPI* playdate;
-
-/* Logging macros */
+/* ========================================================================== */
+/* LOGGIN MACROSS                                                             */
+/* ========================================================================== */
 
 #define LOG_ERROR(format, ...) \
-    playdate->system->logToConsole(playdate, "ERROR: %s: " format, __func__, ##__VA_ARGS__)
+    pd->system->error(pd, "ERROR: %s: " format, __func__, ##__VA_ARGS__)
 
 #define LOG_WARNING(format, ...) \
-    playdate->system->logToConsole(playdate, "WARNING: %s: " format, __func__, ##__VA_ARGS__)
+    pd->system->logToConsole(pd, "WARNING: %s: " format, __func__, ##__VA_ARGS__)
 
 #endif /* LOGGING_H */

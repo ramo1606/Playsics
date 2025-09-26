@@ -37,8 +37,8 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 set(CMAKE_XCODE_GENERATE_SCHEME TRUE) 
 
 # Customize game name and device target name
-set(PLAYDATE_GAME_NAME Rasterizer)     
-set(PLAYDATE_GAME_DEVICE Rasterizer_DEVICE)
+set(PLAYDATE_GAME_NAME Playsics)     
+set(PLAYDATE_GAME_DEVICE Playsics_DEVICE)
 
 # Define the project (C and Assembly languages used)
 project(${PLAYDATE_GAME_NAME} C ASM) 
